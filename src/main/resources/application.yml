@@ -1,9 +1,25 @@
 server:
-  port: 6666
+  port: 8888
+
+
+## 配置待生成数据库的名称
+project:
+  name: 珠穆朗玛峰加装电梯项目
+  database-name: test_tenant
+
 
 spring:
+  ## 配置数据库的连接信息
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    ## 注意：这里的information_schema不能修改
+    url: jdbc:mysql://127.0.0.1:3306/information_schema?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*Mapper.xml,classpath:/mapper/*Mapper.xml
+
+mybatis:
+  mapper-locations: classpath:/mapper/*/*Mapper.xml,classpath:/mapper/*Mapper.xml

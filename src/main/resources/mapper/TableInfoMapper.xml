@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dhj.mapper.TableInfoMapper">
+
+    <!--获取指定数据库下所有的表-->
+    <select id="queryAllTableName" parameterType="string" resultType="map">
+      SELECT TABLE_NAME AS tableName, TABLE_COMMENT AS tableCommit
+      FROM `TABLES` WHERE TABLE_SCHEMA = #{databaseName}
+      ORDER BY TABLE_NAME ASC
+    </select>
+
+    <!--根据表名称获取表的属性信息-->
+    <select id="queryTableInfoByName" parameterType="string" resultType="map">
+        SELECT
+            `COLUMNS`.ORDINAL_POSITION AS serialNo,
+            `COLUMNS`.COLUMN_NAME AS fieldName,
+            `COLUMNS`.COLUMN_TYPE AS typeAndLen,
+            IF( `COLUMNS`.COLUMN_KEY = 'PRI', 'YES', 'NO' ) AS isKey,
+            `COLUMNS`.COLUMN_COMMENT AS describeInfo
+        FROM
+            `TABLES` INNER JOIN `COLUMNS` ON `COLUMNS`.TABLE_SCHEMA = `TABLES`.TABLE_SCHEMA
+            AND `COLUMNS`.TABLE_NAME = `TABLES`.TABLE_NAME
+        WHERE
+            `TABLES`.TABLE_SCHEMA = #{databaseName} AND `TABLES`.TABLE_NAME = #{tableName}
+    </select>
+
+</mapper>
