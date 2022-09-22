@@ -1,23 +1,27 @@
 package com.dhj.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.dhj.core.DealWordHandler;
-import com.dhj.entity.ExcelEntity;
+import com.dhj.service.ITableInfoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStreamWriter;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 import static com.dhj.config.ConfigConstants.*;
 
@@ -34,7 +38,7 @@ public class DownloadController {
     private final DealWordHandler dealWordHandler;
 
     /**
-     * 默认下载word
+     * 默认下载word到本地
      */
     @GetMapping("/word")
     public String word() {
@@ -43,7 +47,7 @@ public class DownloadController {
 
 
     /**
-     * 下载word并指定名称
+     * 下载word到本地并指定名称
      */
     @GetMapping("/word2")
     public String word2(@RequestParam("fileName") String fileName) {
@@ -60,44 +64,30 @@ public class DownloadController {
     }
 
 
-    @PostMapping("/dealExcel")
-    public void dealExcel(@RequestParam(value = "file") MultipartFile file) {
-        try {
-            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+    @GetMapping("/getWord")
+    public void getWord(HttpServletResponse response) throws Exception {
+        getWord2("", response);
+    }
 
-            List<ExcelEntity> data = EasyExcel.read(file.getInputStream()).head(ExcelEntity.class).sheet().doReadSync();
 
-            boolean isNum = true;
-            for (int i = 0; i < data.size() - 1; i++) {
-                if ("1".equals(data.get(i).getNumber()) && isNum) {
-                    data.add(i, new ExcelEntity());
-                    isNum = false;
-                } else {
-                    isNum = true;
-                }
-
-                if (Objects.nonNull(data.get(i).getTableName()) && !data.get(i).getTableName().equals(data.get(i + 1).getTableName())) {
-                    data.add(i + 1, new ExcelEntity(data.get(i + 1).getTableName()));
-                }
-
-            }
-
-            // 设置excel表头样式
-            WriteSheet sheet = EasyExcel.writerSheet("sheet1").head(ExcelEntity.class).sheetNo(1).build();
-            // 设置excel表格样式
-            ExcelWriter writer = EasyExcel.write(response.getOutputStream()).needHead(true).excelType(ExcelTypeEnum.XLSX).build();
-
-            // 写入excel数据
-            writer.write(data, sheet);
-            // 通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文
-            response.setHeader("Content-disposition", "attachment;filename=" + new String("应急预案列表".getBytes("gb2312"), "ISO8859-1") + ".xlsx");
-            response.setContentType("multipart/form-data");
-            response.setCharacterEncoding("utf-8");
-            writer.finish();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    @GetMapping("/getWord2")
+    public void getWord2(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
+        if (StrUtil.isBlank(fileName)) {
+            fileName = PROJECT_NAME + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
         }
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        OutputStreamWriter utf8Writer = IoUtil.getUtf8Writer(outputStream);
+
+        // 写入文件数据
+        dealWordHandler.writeWordData(utf8Writer);
+
+        // 通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文
+        response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1") + SUFFIX);
+        response.setContentType("multipart/form-data");
+        response.setCharacterEncoding("utf-8");
+
+        utf8Writer.close();
     }
 
 }
