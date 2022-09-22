@@ -22,7 +22,7 @@ public class TableInfoServiceImpl implements ITableInfoService {
     }
 
     @Override
-    public List<Map> queryTableInfoByName(String databaseName, String tableName) {
+    public List<Map<String, String>> queryTableInfoByName(String databaseName, String tableName) {
         return tableInfoMapper.queryTableInfoByName(databaseName, tableName);
     }
 

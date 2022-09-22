@@ -14,6 +14,6 @@ public interface ITableInfoService {
     /**
      * 根据表名称获取表的属性信息
      */
-    List<Map> queryTableInfoByName(String databaseName, String tableName);
+    List<Map<String, String>> queryTableInfoByName(String databaseName, String tableName);
 
 }

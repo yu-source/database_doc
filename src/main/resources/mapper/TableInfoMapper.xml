@@ -12,7 +12,7 @@
     <!--根据表名称获取表的属性信息-->
     <select id="queryTableInfoByName" parameterType="string" resultType="map">
         SELECT
-            `COLUMNS`.ORDINAL_POSITION AS serialNo,
+            CAST(`COLUMNS`.ORDINAL_POSITION AS CHAR) AS serialNo,
             `COLUMNS`.COLUMN_NAME AS fieldName,
             `COLUMNS`.COLUMN_TYPE AS typeAndLen,
             IF( `COLUMNS`.COLUMN_KEY = 'PRI', 'YES', 'NO' ) AS isKey,

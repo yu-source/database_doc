@@ -18,10 +18,15 @@ public class DownloadController {
 
     private final DealWordHandler dealWordHandler;
 
-    @GetMapping("/hello")
-    public String hello() {
-        dealWordHandler.initWordFile();
-        return "hello";
+    @GetMapping("/word")
+    public String word() {
+        try {
+            dealWordHandler.initWordFile("");
+
+        } catch (Exception e) {
+            return "<h1>word文件生成错误！" + e.toString() + "</h1>";
+        }
+        return "<h1>word文件生成成功！</h1>";
     }
 
 }

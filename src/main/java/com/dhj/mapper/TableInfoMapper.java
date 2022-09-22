@@ -19,6 +19,6 @@ public interface TableInfoMapper {
     /**
      * 根据表名称获取表的属性信息
      */
-    List<Map> queryTableInfoByName(@Param("databaseName") String databaseName, @Param("tableName") String tableName);
+    List<Map<String, String>> queryTableInfoByName(@Param("databaseName") String databaseName, @Param("tableName") String tableName);
 
 }
