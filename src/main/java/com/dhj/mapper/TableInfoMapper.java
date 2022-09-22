@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * @Author gmd
+ * @Description 表信息mapper层
+ * @Date 2022-09-22 15:42:12
+ */
 @Mapper
 public interface TableInfoMapper {
 

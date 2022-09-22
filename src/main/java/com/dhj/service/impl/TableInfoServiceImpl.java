@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @Author gmd
+ * @Description 表信息service实现层
+ * @Date 2022-09-22 15:43:22
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor

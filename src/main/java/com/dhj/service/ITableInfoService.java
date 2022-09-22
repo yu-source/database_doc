@@ -3,7 +3,11 @@ package com.dhj.service;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @Author gmd
+ * @Description 表信息service层
+ * @Date 2022-09-22 15:42:39
+ */
 public interface ITableInfoService {
 
     /**

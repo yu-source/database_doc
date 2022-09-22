@@ -1,5 +1,7 @@
 package com.dhj.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -13,8 +15,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import static com.dhj.config.ConfigConstants.*;
 
 /**
  * @Author gmd
@@ -28,16 +33,32 @@ public class DownloadController {
 
     private final DealWordHandler dealWordHandler;
 
+    /**
+     * 默认下载word
+     */
     @GetMapping("/word")
     public String word() {
+        return word2("");
+    }
+
+
+    /**
+     * 下载word并指定名称
+     */
+    @GetMapping("/word2")
+    public String word2(@RequestParam("fileName") String fileName) {
+        if (StrUtil.isBlank(fileName)) {
+            fileName = PROJECT_NAME + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
+        }
         try {
-            dealWordHandler.initWordFile("");
+            dealWordHandler.initWordFile(FILE_SAVA_PATH + fileName + SUFFIX);
 
         } catch (Exception e) {
             return "<h1>word文件生成错误！" + e.toString() + "</h1>";
         }
-        return "<h1>word文件生成成功！</h1>";
+        return "<h1>word文件生成成功！文件名称：" + fileName + SUFFIX + "</h1>";
     }
+
 
     @PostMapping("/dealExcel")
     public void dealExcel(@RequestParam(value = "file") MultipartFile file) {
@@ -47,16 +68,16 @@ public class DownloadController {
             List<ExcelEntity> data = EasyExcel.read(file.getInputStream()).head(ExcelEntity.class).sheet().doReadSync();
 
             boolean isNum = true;
-            for(int i=0; i<data.size()-1; i++){
-                if("1".equals(data.get(i).getNumber()) && isNum){
+            for (int i = 0; i < data.size() - 1; i++) {
+                if ("1".equals(data.get(i).getNumber()) && isNum) {
                     data.add(i, new ExcelEntity());
                     isNum = false;
-                }else {
+                } else {
                     isNum = true;
                 }
 
-                if(Objects.nonNull(data.get(i).getTableName()) && !data.get(i).getTableName().equals(data.get(i+1).getTableName())){
-                    data.add(i+1, new ExcelEntity(data.get(i+1).getTableName()));
+                if (Objects.nonNull(data.get(i).getTableName()) && !data.get(i).getTableName().equals(data.get(i + 1).getTableName())) {
+                    data.add(i + 1, new ExcelEntity(data.get(i + 1).getTableName()));
                 }
 
             }

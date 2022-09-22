@@ -1,13 +1,6 @@
 server:
   port: 8888
 
-
-## 配置待生成数据库的名称
-project:
-  name: 珠穆朗玛峰加装电梯项目
-  database-name: test_tenant
-
-
 spring:
   ## 配置数据库的连接信息
   datasource:
