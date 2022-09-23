@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库文档字段选择</title>
+    <style>
+        input {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 900px; margin: 10px auto;">
+    <form action="value" method="post">
+        序号: <input name="serial" type="checkbox" value=""/>
+        <input type="text" name="firstname"> <br/>
+
+        字段名称: <input name="serial" type="checkbox" value=""/>
+        <input type="text" name="firstname"> <br/>
+
+        类型: <input name="serial" type="checkbox" value=""/>
+        <input type="text" name="firstname"> <br/>
+
+        描述: <input name="serial" type="checkbox" value=""/>
+        <input type="text" name="firstname"> <br/>
+
+        过滤字段: <input type="text" name="firstname" style="height: 25px; width: 400px;"
+                     placeholder="多个用英文逗号隔开。例如：insert_time,update_time"> <br/>
+
+        <br/>
+        <input type="submit" value="提交" style="width: 100px;height: 40px;cursor: pointer;font-size: 20px;"/>
+    </form>
+
+    <hr/>
+
+    <p>
+        <b>说明：</b><br/>
+        1、选择你需要的字段，在对应的多选框打勾，并且可以在对应的输入框中重新修改其名称。<br/>
+        2、如果有表固定字段不需要显示，可以添加过滤字段（例如：insert_time、update_time等）。
+    </p>
+
+</div>
+</body>
+</html>
+

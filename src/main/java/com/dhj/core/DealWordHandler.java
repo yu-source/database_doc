@@ -1,10 +1,10 @@
 package com.dhj.core;
 
-import cn.hutool.core.util.StrUtil;
 import com.dhj.service.ITableInfoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,7 +13,6 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import static com.dhj.config.ConfigConstants.*;
 import static com.dhj.config.ContentConstants.*;
 
 /**
@@ -21,11 +20,19 @@ import static com.dhj.config.ContentConstants.*;
  * @Description word文档处理核心类
  * @Date 2022-09-21 18:19:03
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class DealWordHandler {
 
     private final ITableInfoService tableInfoService;
+
+    @Value("${project.name:XXX项目}")
+    private String projectName;
+
+    @Value("${project.database-name:test}")
+    private String databaseName;
+
 
     public void initWordFile(String filePathName) throws Exception {
         // 创建文件写入对象
@@ -52,10 +59,10 @@ public class DealWordHandler {
         writer.write(FILE_STYLE);
 
         // 设置word首页
-        writer.write(INDEX_INFO.replace("${projectName}", PROJECT_NAME));
+        writer.write(INDEX_INFO.replace("${projectName}", projectName));
 
         // 遍历数据表，写入表信息
-        List<Map<String, String>> tableList = tableInfoService.queryAllTableName(DATABASE_NAME);
+        List<Map<String, String>> tableList = tableInfoService.queryAllTableName(databaseName);
         for (Map<String, String> ele : tableList) {
             // 插入数据表标题信息
             String tableName = TABLE_NAME.replace("${tableDesc}", ele.get("tableCommit"))
@@ -67,7 +74,7 @@ public class DealWordHandler {
             writer.write(TABLE_HEADER);
 
             // 遍历表字段
-            List<Map<String, String>> data = tableInfoService.queryTableInfoByName(DATABASE_NAME, ele.get("tableName"));
+            List<Map<String, String>> data = tableInfoService.queryTableInfoByName(databaseName, ele.get("tableName"));
             for (Map<String, String> fields : data) {
                 String tableBody = "";
                 if ("YES".equals(fields.get("isKey"))) {

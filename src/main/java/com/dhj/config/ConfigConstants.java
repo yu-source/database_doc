@@ -7,15 +7,6 @@ package com.dhj.config;
  */
 public class ConfigConstants {
 
-    /**
-     * 项目名称
-     */
-    public final static String PROJECT_NAME = "若依";
-
-    /**
-     * 数据库名称
-     */
-    public final static String DATABASE_NAME = "ruoyi";
 
     /**
      * 文件保存路径

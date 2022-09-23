@@ -5,6 +5,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.dhj.core.DealWordHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,8 @@ import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.Date;
 
-import static com.dhj.config.ConfigConstants.*;
+import static com.dhj.config.ConfigConstants.FILE_SAVA_PATH;
+import static com.dhj.config.ConfigConstants.SUFFIX;
 
 /**
  * @Author gmd
@@ -28,6 +30,10 @@ import static com.dhj.config.ConfigConstants.*;
 public class DownloadController {
 
     private final DealWordHandler dealWordHandler;
+
+    @Value("${project.name:XXX项目}")
+    private String projectName;
+
 
     /**
      * 默认下载word到本地
@@ -44,7 +50,7 @@ public class DownloadController {
     @GetMapping("/word2")
     public String word2(@RequestParam("fileName") String fileName) {
         if (StrUtil.isBlank(fileName)) {
-            fileName = PROJECT_NAME + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
+            fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
         }
         try {
             dealWordHandler.initWordFile(FILE_SAVA_PATH + fileName + SUFFIX);
@@ -65,7 +71,7 @@ public class DownloadController {
     @GetMapping("/getWord2")
     public void getWord2(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
         if (StrUtil.isBlank(fileName)) {
-            fileName = PROJECT_NAME + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
+            fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
         }
 
         // 通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文

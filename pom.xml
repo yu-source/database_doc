@@ -70,6 +70,12 @@
             <version>3.0.5</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -94,6 +100,7 @@
                 <includes>
                     <include>**/*.yml</include>
                     <include>**/*.xml</include>
+                    <include>**/*.html</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
