@@ -3,28 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>数据库文档字段选择</title>
-    <style>
+    <style type="text/css">
         input {
             margin: 4px 0;
         }
+        #showColor {
+            width: 100px;
+            height: 24px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+        }
     </style>
+    <script type="text/javascript">
+        function showColor(val) {
+            document.getElementById("showColor").style.background="#"+val;
+        }
+    </script>
 </head>
 <body>
 <div style="width: 900px; margin: 10px auto;">
     <form action="value" method="post">
-        序号: <input name="serial" type="checkbox" value=""/>
-        <input type="text" name="firstname"> <br/>
+        序号: <input name="checkList" type="checkbox" value="serialNo" checked />
+        <input type="text" name="serialNo"> <br/>
 
-        字段名称: <input name="serial" type="checkbox" value=""/>
-        <input type="text" name="firstname"> <br/>
+        字段名: <input name="checkList" type="checkbox" value="fieldName" checked />
+        <input type="text" name="fieldName"> <br/>
 
-        类型: <input name="serial" type="checkbox" value=""/>
-        <input type="text" name="firstname"> <br/>
+        类型: <input name="checkList" type="checkbox" value="type" />
+        <input type="text" name="type"> <br/>
 
-        描述: <input name="serial" type="checkbox" value=""/>
-        <input type="text" name="firstname"> <br/>
+        长度: <input name="checkList" type="checkbox" value="length" />
+        <input type="text" name="length"> <br/>
 
-        过滤字段: <input type="text" name="firstname" style="height: 25px; width: 400px;"
+        类型(长度): <input name="checkList" type="checkbox" value="typeAndLen" checked />
+        <input type="text" name="typeAndLen"> <br/>
+
+        精度: <input name="checkList" type="checkbox" value="precision" />
+        <input type="text" name="precision"> <br/>
+
+        小数位数: <input name="checkList" type="checkbox" value="numScale" />
+        <input type="text" name="numScale"> <br/>
+
+        允许为空: <input name="checkList" type="checkbox" value="allowEmpty" />
+        <input type="text" name="allowEmpty"> <br/>
+
+        主键: <input name="checkList" type="checkbox" value="mainKey" checked />
+        <input type="text" name="mainKey"> <br/>
+
+        默认值: <input name="checkList" type="checkbox" value="defaultVal" />
+        <input type="text" name="defaultVal"> <br/>
+
+        描述: <input name="checkList" type="checkbox" value="describeInfo" checked />
+        <input type="text" name="describeInfo"> <br/>
+
+
+        <hr/>
+        背景颜色: <input type="text" name="backgroundColor" value="A6A6A6" maxlength="6" onblur="showColor(this.value)">
+        <div id="showColor" style="background: #A6A6A6">背景颜色</div><br/>
+        是否加粗: <input name="isBold" type="radio" value="YES" /> 是 &nbsp;&nbsp;&nbsp; <input name="isBold" type="radio" value="NO" checked /> 否 <br/>
+        过滤字段: <input type="text" name="filterField" style="height: 25px; width: 400px;"
                      placeholder="多个用英文逗号隔开。例如：insert_time,update_time"> <br/>
 
         <br/>
@@ -36,7 +75,9 @@
     <p>
         <b>说明：</b><br/>
         1、选择你需要的字段，在对应的多选框打勾，并且可以在对应的输入框中重新修改其名称。<br/>
-        2、如果有表固定字段不需要显示，可以添加过滤字段（例如：insert_time、update_time等）。
+        2、默认背景颜色为灰色，如果不需要背景颜色则删除值；如果需要其他颜色，填入对应的颜色的十六进制编码即可。
+        参考网址：<a target="_blank" href="https://www.sioe.cn/yingyong/yanse-rgb-16/">https://www.sioe.cn/yingyong/yanse-rgb-16/</a><br/>
+        3、如果有表固定字段不需要显示，可以添加过滤字段（例如：insert_time、update_time等）。
     </p>
 
 </div>

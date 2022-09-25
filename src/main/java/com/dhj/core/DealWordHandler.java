@@ -96,6 +96,8 @@ public class DealWordHandler {
             // 换行，二行
             writer.write(WRAP);
             writer.write(WRAP);
+
+            log.info("------【"+ele.get("tableCommit")+"】"+ele.get("tableName")+"生成成功");
         }
 
         // 设置word末尾信息
