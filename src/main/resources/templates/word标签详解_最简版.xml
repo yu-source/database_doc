@@ -99,7 +99,7 @@
 				</w:r>
 			</w:p>
 
-            <!--word段落-->
+            <!--word段落，设置数据表名称样式-->
             <w:p wsp:rsidR="000354C8" wsp:rsidRDefault="000354C8" wsp:rsidP="000354C8">
                 <w:pPr>
                     <w:jc w:val="left"/>
@@ -135,7 +135,7 @@
                     </w:tblBorders>
                     <w:tblLook w:val="04A0"/>
                 </w:tblPr>
-                <!--设置表行数，同时配置每列的长度。word常规布局下，表单的最大宽度为8520-->
+                <!--设置表列数，同时配置每列的长度。word常规布局下，表单的最大宽度为8520-->
                 <w:tblGrid>
                     <w:gridCol w:w="1659"/>
                     <w:gridCol w:w="1659"/>
