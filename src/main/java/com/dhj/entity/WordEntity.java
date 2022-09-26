@@ -69,4 +69,17 @@ public class WordEntity {
      */
     private String describeInfo;
 
+    /**
+     * 默认字段配置
+     */
+    public static WordEntity getDefaultField(){
+        WordEntity wordEntity = new WordEntity();
+        wordEntity.serialNo = "序号";
+        wordEntity.fieldName = "字段名";
+        wordEntity.typeAndLen = "类型(长度)";
+        wordEntity.mainKey = "主键";
+        wordEntity.describeInfo = "描述";
+        return wordEntity;
+    }
+
 }

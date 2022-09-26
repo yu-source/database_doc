@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import com.dhj.core.DealWordHandler;
+import com.dhj.entity.StyleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.Date;
 
-import static com.dhj.config.ConfigConstants.FILE_SAVA_PATH;
+import static com.dhj.config.ConfigConstants.FILE_SAVE_PATH;
 import static com.dhj.config.ConfigConstants.SUFFIX;
 
 /**
@@ -53,7 +54,7 @@ public class DownloadController {
             fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
         }
         try {
-            dealWordHandler.initWordFile(FILE_SAVA_PATH + fileName + SUFFIX);
+            dealWordHandler.createWordFile(StyleEntity.getDefaultStyle(), FILE_SAVE_PATH + fileName + SUFFIX);
 
         } catch (Exception e) {
             return "<h1>word文件生成错误！" + e.toString() + "</h1>";

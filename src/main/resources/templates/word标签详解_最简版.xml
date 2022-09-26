@@ -135,20 +135,21 @@
                     </w:tblBorders>
                     <w:tblLook w:val="04A0"/>
                 </w:tblPr>
-                <!--设置表行数-->
+                <!--设置表行数，同时配置每列的长度。word常规布局下，表单的最大宽度为8520-->
                 <w:tblGrid>
                     <w:gridCol w:w="1659"/>
                     <w:gridCol w:w="1659"/>
                     <w:gridCol w:w="1659"/>
                     <w:gridCol w:w="1659"/>
-                    <w:gridCol w:w="1660"/>
                 </w:tblGrid>
                 <!--第一行数据，表头-->
                 <w:tr wsp:rsidR="00C2420B" wsp:rsidRPr="00F714D4" wsp:rsidTr="00F714D4">
                     <w:tc>
                         <w:tcPr>
+                            <!--设置当前单元格的宽度-->
                             <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
+                            <!--设置当前单元格的填充颜色-->
+                            <w:shd w:val="clear" w:color="auto" w:fill="00FF00"/>
                         </w:tcPr>
                         <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
                             <w:pPr>
@@ -156,6 +157,9 @@
                                 <w:rPr>
                                     <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
                                     <wx:font wx:val="宋体"/>
+                                    <!--下面两行设置字体加粗，不填则不加粗-->
+                                    <w:b/>
+                                    <w:b-cs/>
                                     <w:sz-cs w:val="21"/>
                                 </w:rPr>
                             </w:pPr>
@@ -501,121 +505,6 @@
                                     <w:sz-cs w:val="21"/>
                                 </w:rPr>
                                 <w:t>姓名</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                </w:tr>
-                <!--第四行数据-->
-                <w:tr wsp:rsidR="00C2420B" wsp:rsidRPr="00F714D4" wsp:rsidTr="00F714D4">
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
-                            <w:pPr>
-                                <w:jc w:val="left"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00F714D4">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                                <w:t>3</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
-                            <w:pPr>
-                                <w:jc w:val="left"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00F714D4">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                                <w:t>Code</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
-                            <w:pPr>
-                                <w:jc w:val="left"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00F714D4">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                                <w:t>varchar(50)</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
-                            <w:pPr>
-                                <w:jc w:val="left"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                            </w:pPr>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1660" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="auto"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="000354C8" wsp:rsidRPr="00F714D4" wsp:rsidRDefault="000354C8" wsp:rsidP="00F714D4">
-                            <w:pPr>
-                                <w:jc w:val="left"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00F714D4">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体" w:hint="fareast"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz-cs w:val="21"/>
-                                </w:rPr>
-                                <w:t>编码</w:t>
                             </w:r>
                         </w:p>
                     </w:tc>

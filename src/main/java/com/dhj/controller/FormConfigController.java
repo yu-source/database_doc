@@ -1,12 +1,8 @@
 package com.dhj.controller;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.HexUtil;
-import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
-import com.dhj.core.FormWordHandler;
+import com.dhj.core.DealWordHandler;
 import com.dhj.entity.StyleEntity;
-import com.dhj.entity.WordEntity;
 import com.dhj.utils.PageConfigUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Map;
 
-import static com.dhj.config.ConfigConstants.FILE_SAVA_PATH;
+import static com.dhj.config.ConfigConstants.FILE_SAVE_PATH;
 import static com.dhj.config.ConfigConstants.SUFFIX;
 
 /**
@@ -36,7 +29,7 @@ import static com.dhj.config.ConfigConstants.SUFFIX;
 @RequiredArgsConstructor
 public class FormConfigController {
 
-    private final FormWordHandler formWordHandler;
+    private final DealWordHandler dealWordHandler;
 
     @Value("${project.name:XXX项目}")
     private String projectName;
@@ -54,7 +47,7 @@ public class FormConfigController {
         String fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
         try {
             StyleEntity style = PageConfigUtils.analysisConfig(request.getParameterMap());
-            formWordHandler.createWordFile(style, FILE_SAVA_PATH + fileName + SUFFIX);
+            dealWordHandler.createWordFile(style, FILE_SAVE_PATH + fileName + SUFFIX);
 
         } catch (Exception e) {
             return "<h1>word文件生成错误！" + e.toString() + "</h1>";

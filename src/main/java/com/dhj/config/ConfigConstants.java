@@ -7,15 +7,19 @@ package com.dhj.config;
  */
 public class ConfigConstants {
 
-
     /**
      * 文件保存路径
      */
-    public final static String FILE_SAVA_PATH = "./src/main/resources/static/word/";
+    public final static String FILE_SAVE_PATH = "./src/main/resources/static/word/";
 
     /**
      * 文件后缀名
      */
     public final static String SUFFIX = ".doc";
+
+    /**
+     * word常规布局下，表单的最大宽度
+     */
+    public final static Integer MAX_WIDTH = 8520;
 
 }

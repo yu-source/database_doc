@@ -1,5 +1,6 @@
 package com.dhj.core;
 
+import com.dhj.entity.StyleEntity;
 import com.dhj.service.ITableInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class DealWordHandler {
     private String databaseName;
 
 
-    public void initWordFile(String filePathName) throws Exception {
+    public void createWordFile(StyleEntity style, String filePathName) throws Exception {
         // 创建文件写入对象
         FileWriter fileWriter = null;
         // 创建字符流写入对象

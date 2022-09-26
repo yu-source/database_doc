@@ -23,7 +23,7 @@ public class PageConfigUtils {
         style.setIsBold(config.get("isBold")[0]);
         style.setFilterField(config.get("filterField"));
         if (HexUtil.isHexNumber("#" + config.get("backgroundColor")[0])) {
-            style.setBackgroundColor("#" + config.get("backgroundColor")[0]);
+            style.setBackgroundColor(config.get("backgroundColor")[0]);
         }
         style.setFiledLen(config.get("checkList").length);
 
