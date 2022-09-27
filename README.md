@@ -10,7 +10,7 @@ https://blog.csdn.net/qq_41057885/article/details/114436170
 
 # 使用说明
 
-## 默认配置
+## 一、下载默认配置
 #### 1、替换数据库，启动项目
 找到application.yml配置文件，修改如图所示的配置
 ![1](src/main/resources/static/images/1.jpg)
@@ -32,7 +32,7 @@ https://blog.csdn.net/qq_41057885/article/details/114436170
 如果你需要更多的字段和其他样式，可以使用配置页面
 
 
-## 配置页面用法
+## 自定义配置页面
 浏览器访问http://127.0.0.1:8888/form/index 即可进入配置页面，选择你需要的配置即可下载相应的word文档。
 ![2](src/main/resources/static/images/2.png)
 
