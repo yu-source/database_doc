@@ -72,7 +72,7 @@ public class WordEntity {
     /**
      * 默认字段配置
      */
-    public static WordEntity getDefaultField(){
+    public static WordEntity getDefaultField() {
         WordEntity wordEntity = new WordEntity();
         wordEntity.serialNo = "序号";
         wordEntity.fieldName = "字段名";

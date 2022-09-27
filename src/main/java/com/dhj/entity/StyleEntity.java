@@ -47,7 +47,7 @@ public class StyleEntity implements Serializable {
     /**
      * 默认样式配置
      */
-    public static StyleEntity getDefaultStyle(){
+    public static StyleEntity getDefaultStyle() {
         return new StyleEntity("A6A6A6", "1", "", WordField.getDefaultFieldList(), 9);
     }
 

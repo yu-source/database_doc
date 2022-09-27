@@ -57,7 +57,7 @@ public class DealWordHandler {
 
         // 设置全局样式配置变量
         style = styleEntity;
-        log.info("------ word配置信息：背景颜色：{}，是否加粗：{}，过滤字段：{}，显示字段（{}）：{}",style.getBackgroundColor(),
+        log.info("------ word配置信息：背景颜色：{}，是否加粗：{}，过滤字段：{}，显示字段（{}）：{}", style.getBackgroundColor(),
                 style.getIsBold(), style.getFilterField(), style.getWordFields().size(), style.getWordFields().toString());
 
         // 写入文件数据
@@ -95,7 +95,7 @@ public class DealWordHandler {
             writer.write(WRAP);
             writer.write(WRAP);
 
-            log.info("------【"+ele.get("tableCommit")+"】"+ele.get("tableName")+" 生成成功");
+            log.info("------【" + ele.get("tableCommit") + "】" + ele.get("tableName") + " 生成成功");
         }
 
         // 设置word末尾信息
@@ -118,8 +118,8 @@ public class DealWordHandler {
         // 获取每份权重的宽度
         Integer eachWidth = MAX_WIDTH / style.getLenWeight();
         // 设置每列宽度
-        for(WordField field : style.getWordFields()){
-            writer.write(COLUMN_NUM_FORMAT.replace("${width}", StrUtil.toString(eachWidth*field.getWeight())));
+        for (WordField field : style.getWordFields()) {
+            writer.write(COLUMN_NUM_FORMAT.replace("${width}", StrUtil.toString(eachWidth * field.getWeight())));
         }
         // 插入word表设置列数结束符
         writer.write(COLUMN_NUM_END_FLAG);
@@ -131,7 +131,7 @@ public class DealWordHandler {
         List<Map<String, String>> data = tableInfoService.queryTableInfoByName(databaseName, tableName);
         for (Map<String, String> tableField : data) {
             // 非过滤字段才能写入数据
-            if(!style.getFilterField().contains(tableField.get("fieldName"))){
+            if (!style.getFilterField().contains(tableField.get("fieldName"))) {
                 // 写入word表数据，一个数据表字段就是word表一行
                 writeWordCell(writer, tableField, eachWidth);
             }
@@ -150,12 +150,12 @@ public class DealWordHandler {
         writer.write(ROW_START_FLAG);
 
         // 设置每列数据
-        for(WordField field : style.getWordFields()){
+        for (WordField field : style.getWordFields()) {
             // word表单元格开始符
             writer.write(CELL_START_FLAG);
 
             // word表单元格样式
-            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth*field.getWeight()))
+            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth * field.getWeight()))
                     .replace("${fillColor}", "auto"));
 
             // word表单元格内容
@@ -178,13 +178,13 @@ public class DealWordHandler {
         writer.write(ROW_START_FLAG);
 
         // 设置每列数据
-        for(WordField field : style.getWordFields()){
+        for (WordField field : style.getWordFields()) {
             // word表单元格开始符
             writer.write(CELL_START_FLAG);
 
             // word表单元格样式
-            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth*field.getWeight()))
-                        .replace("${fillColor}", StrUtil.blankToDefault(style.getBackgroundColor(), "auto")));
+            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth * field.getWeight()))
+                    .replace("${fillColor}", StrUtil.blankToDefault(style.getBackgroundColor(), "auto")));
 
             // word表单元格内容
             writer.write(CELL_CONTENT.replace("${isBold}", StrUtil.isBlank(style.getIsBold()) ? "" : CONTENT_BOLD)
@@ -197,7 +197,6 @@ public class DealWordHandler {
         // word表格行结束符
         writer.write(ROW_END_FLAG);
     }
-
 
 
 }

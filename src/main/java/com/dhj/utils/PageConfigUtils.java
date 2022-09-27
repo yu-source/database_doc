@@ -1,8 +1,6 @@
 package com.dhj.utils;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.HexUtil;
-import cn.hutool.core.util.StrUtil;
 import com.dhj.entity.StyleEntity;
 import com.dhj.entity.WordField;
 
@@ -20,7 +18,7 @@ public class PageConfigUtils {
         // 是否加粗
         style.setIsBold(config.get("isBold")[0]);
         // 过滤字段
-        style.setFilterField(","+Arrays.toString(config.get("filterField"))+",");
+        style.setFilterField("," + Arrays.toString(config.get("filterField")) + ",");
         // 背景颜色
         if (HexUtil.isHexNumber("#" + config.get("backgroundColor")[0])) {
             style.setBackgroundColor(config.get("backgroundColor")[0]);
