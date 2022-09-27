@@ -50,6 +50,7 @@ public class FormConfigController {
             dealWordHandler.createWordFile(style, FILE_SAVE_PATH + fileName + SUFFIX);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return "<h1>word文件生成错误！" + e.toString() + "</h1>";
         }
         return "<h1>word文件生成成功！文件名称：" + fileName + SUFFIX + "</h1>";

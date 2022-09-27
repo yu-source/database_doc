@@ -1,6 +1,8 @@
 package com.dhj.core;
 
+import cn.hutool.core.util.StrUtil;
 import com.dhj.entity.StyleEntity;
+import com.dhj.entity.WordField;
 import com.dhj.service.ITableInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +57,8 @@ public class DealWordHandler {
 
         // 设置全局样式配置变量
         style = styleEntity;
+        log.info("------ word配置信息：背景颜色：{}，是否加粗：{}，过滤字段：{}，显示字段（{}）：{}",style.getBackgroundColor(),
+                style.getIsBold(), style.getFilterField(), style.getWordFields().size(), style.getWordFields().toString());
 
         // 写入文件数据
         writeWordData(writer);
@@ -91,7 +95,7 @@ public class DealWordHandler {
             writer.write(WRAP);
             writer.write(WRAP);
 
-            log.info("------【"+ele.get("tableCommit")+"】"+ele.get("tableName")+"生成成功");
+            log.info("------【"+ele.get("tableCommit")+"】"+ele.get("tableName")+" 生成成功");
         }
 
         // 设置word末尾信息
@@ -111,40 +115,27 @@ public class DealWordHandler {
 
         // 插入word表设置列数开始符
         writer.write(COLUMN_NUM_START_FLAG);
-        // 获取每列宽度
-        Integer columnWidth = MAX_WIDTH / style.getFiledLen();
-        // 设置列宽度
-        writer.write(COLUMN_NUM_FORMAT.replace("${width}", columnWidth.toString()));
+        // 获取每份权重的宽度
+        Integer eachWidth = MAX_WIDTH / style.getLenWeight();
+        // 设置每列宽度
+        for(WordField field : style.getWordFields()){
+            writer.write(COLUMN_NUM_FORMAT.replace("${width}", StrUtil.toString(eachWidth*field.getWeight())));
+        }
         // 插入word表设置列数结束符
         writer.write(COLUMN_NUM_END_FLAG);
 
         // 设置word表头信息
-        writeWordExcelHeader(writer);
-
-
+        writeWordExcelHeader(writer, eachWidth);
 
         // 遍历数据库表字段
         List<Map<String, String>> data = tableInfoService.queryTableInfoByName(databaseName, tableName);
-        for (Map<String, String> fields : data) {
-            String tableBody = "";
-            if ("YES".equals(fields.get("isKey"))) {
-             //   tableBody = TABLE_BODY_IS_KEY;
-            } else {
-            //    tableBody = TABLE_BODY_NO_KEY;
+        for (Map<String, String> tableField : data) {
+            // 非过滤字段才能写入数据
+            if(!style.getFilterField().contains(tableField.get("fieldName"))){
+                // 写入word表数据，一个数据表字段就是word表一行
+                writeWordCell(writer, tableField, eachWidth);
             }
-            tableBody = tableBody.replace("${serialNo}", fields.get("serialNo"))
-                    .replace("${fieldName}", fields.get("fieldName"))
-                    .replace("${typeAndLen}", fields.get("typeAndLen"))
-                    .replace("${describe}", fields.get("describeInfo"));
-            // 写入表字段行信息
-            writer.write(tableBody);
         }
-
-
-
-
-
-
 
         // 插入word表结束标识
         writer.write(TABLE_END_FLAG);
@@ -154,23 +145,50 @@ public class DealWordHandler {
     /**
      * 写入word单元格数据
      */
-    private void writeWordCell(Writer writer){
+    private void writeWordCell(Writer writer, Map<String, String> tableField, Integer eachWidth) throws Exception {
+        // word表格行开始符
+        writer.write(ROW_START_FLAG);
 
+        // 设置每列数据
+        for(WordField field : style.getWordFields()){
+            // word表单元格开始符
+            writer.write(CELL_START_FLAG);
 
+            // word表单元格样式
+            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth*field.getWeight()))
+                    .replace("${fillColor}", "auto"));
+
+            // word表单元格内容
+            writer.write(CELL_CONTENT.replace("${isBold}", "")
+                    .replace("${content}", StrUtil.nullToDefault(tableField.get(field.getKey()), "")));
+            // word表单元格开始符
+            writer.write(CELL_END_FLAG);
+        }
+
+        // word表格行结束符
+        writer.write(ROW_END_FLAG);
     }
 
 
     /**
      * 写入word表头信息
      */
-    private void writeWordExcelHeader(Writer writer) throws Exception {
+    private void writeWordExcelHeader(Writer writer, Integer eachWidth) throws Exception {
         // word表格行开始符
         writer.write(ROW_START_FLAG);
 
-        for(int i = 0; i < style.getFiledLen(); i++){
+        // 设置每列数据
+        for(WordField field : style.getWordFields()){
             // word表单元格开始符
             writer.write(CELL_START_FLAG);
 
+            // word表单元格样式
+            writer.write(CELL_STYLE_INFO.replace("${width}", StrUtil.toString(eachWidth*field.getWeight()))
+                        .replace("${fillColor}", StrUtil.blankToDefault(style.getBackgroundColor(), "auto")));
+
+            // word表单元格内容
+            writer.write(CELL_CONTENT.replace("${isBold}", StrUtil.isBlank(style.getIsBold()) ? "" : CONTENT_BOLD)
+                    .replace("${content}", field.getName()));
 
             // word表单元格开始符
             writer.write(CELL_END_FLAG);

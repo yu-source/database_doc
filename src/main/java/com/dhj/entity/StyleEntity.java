@@ -3,8 +3,10 @@ package com.dhj.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author gmd
@@ -12,6 +14,7 @@ import java.io.Serializable;
  * @Date 2022-09-24 16:32:58
  */
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class StyleEntity implements Serializable {
@@ -27,25 +30,25 @@ public class StyleEntity implements Serializable {
     private String isBold;
 
     /**
-     * 过滤字段
+     * 过滤字段，多个用英文逗号隔开
      */
-    private String[] filterField;
+    private String filterField;
 
     /**
      * 字段列表
      */
-    private WordEntity wordEntity;
+    private List<WordField> WordFields;
 
     /**
-     * 字段长度
+     * word宽度权重总数
      */
-    private Integer filedLen;
+    private Integer lenWeight;
 
     /**
      * 默认样式配置
      */
     public static StyleEntity getDefaultStyle(){
-        return new StyleEntity("A6A6A6", "1", new String[1], WordEntity.getDefaultField(), 5);
+        return new StyleEntity("A6A6A6", "1", "", WordField.getDefaultFieldList(), 9);
     }
 
 }

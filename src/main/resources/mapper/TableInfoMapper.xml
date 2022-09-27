@@ -12,16 +12,21 @@
     <!--根据表名称获取表的属性信息-->
     <select id="queryTableInfoByName" parameterType="string" resultType="map">
         SELECT
-            CAST(`COLUMNS`.ORDINAL_POSITION AS CHAR) AS serialNo,
-            `COLUMNS`.COLUMN_NAME AS fieldName,
-            `COLUMNS`.COLUMN_TYPE AS typeAndLen,
-            IF( `COLUMNS`.COLUMN_KEY = 'PRI', 'YES', 'NO' ) AS isKey,
-            `COLUMNS`.COLUMN_COMMENT AS describeInfo
+            CAST(t2.ORDINAL_POSITION AS CHAR) AS serialNo,
+            t2.COLUMN_NAME AS fieldName,
+            t2.DATA_TYPE AS `type`,
+            SUBSTRING(t2.COLUMN_TYPE, locate( "(", t2.COLUMN_TYPE )+ 1, LENGTH( t2.COLUMN_TYPE ) - locate( "(", t2.COLUMN_TYPE )- 1 ) AS `length`,
+            t2.COLUMN_TYPE AS typeAndLen,
+            t2.NUMERIC_PRECISION AS `precision`,
+            t2.NUMERIC_SCALE AS numScale,
+            t2.IS_NULLABLE AS allowEmpty,
+            IF( t2.COLUMN_KEY = 'PRI', 'YES', 'NO' ) AS mainKey,
+            t2.COLUMN_DEFAULT AS defaultVal,
+            t2.COLUMN_COMMENT AS describeInfo
         FROM
-            `TABLES` INNER JOIN `COLUMNS` ON `COLUMNS`.TABLE_SCHEMA = `TABLES`.TABLE_SCHEMA
-            AND `COLUMNS`.TABLE_NAME = `TABLES`.TABLE_NAME
+            `TABLES` t1 INNER JOIN `COLUMNS` t2 ON t2.TABLE_SCHEMA = t1.TABLE_SCHEMA AND t2.TABLE_NAME = t1.TABLE_NAME
         WHERE
-            `TABLES`.TABLE_SCHEMA = #{databaseName} AND `TABLES`.TABLE_NAME = #{tableName}
+            t1.TABLE_SCHEMA = #{databaseName} AND t1.TABLE_NAME = #{tableName}
     </select>
 
 </mapper>
