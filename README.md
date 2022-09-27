@@ -18,7 +18,11 @@ https://blog.csdn.net/qq_41057885/article/details/114436170
 
 #### 3、浏览器访问接口
 
-| 接口地址        | 说明           |
-|:-----------------:|:-------------:|
-|  http://127.0.0.1:8888/download/word  |   下载word到本地，地址是./src/main/resources/static/word/，文件名默认  |
-|  http://127.0.0.1:8888/download/word2?fileName=XXX.doc  |   下载word到本地，默认地址是./src/main/resources/static/word/  |
+|                       接口地址                             |                   说明                    |
+|-----------------------------------------------------------|-----------------------------------------|
+|  http://127.0.0.1:8888/download/word                      |         下载word到本地，文件名默认           |
+|  http://127.0.0.1:8888/download/word2?fileName=XXX.doc    |      下载word到本地，文件名由用户指定         |
+|  http://127.0.0.1:8888/download/getWord                   |     返回文件流，直接浏览器下载，文件名默认      |
+|  http://127.0.0.1:8888/download/word2?fileName=XXX.doc    |    返回文件流，直接浏览器下载，文件名由用户指定  |
+
+默认下载地址为：./src/main/resources/static/word/
