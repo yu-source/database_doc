@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -65,29 +66,40 @@ public class DownloadController {
 
 
     @GetMapping("/getWord")
-    public void getWord(HttpServletResponse response) throws Exception {
+    public void getWord(HttpServletResponse response) {
         getWord2("", response);
     }
 
 
     @GetMapping("/getWord2")
-    public void getWord2(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
-        if (StrUtil.isBlank(fileName)) {
-            fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
+    public void getWord2(@RequestParam("fileName") String fileName, HttpServletResponse response) {
+        OutputStreamWriter utf8Writer = null;
+        try {
+            if (StrUtil.isBlank(fileName)) {
+                fileName = projectName + "数据库设计文档_" + DateUtil.format(new Date(), "HHmmss");
+            }
+
+            // 通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8") + SUFFIX);
+
+            utf8Writer = IoUtil.getUtf8Writer(response.getOutputStream());
+
+            // 写入文件数据
+            dealWordHandler.writeWordData(utf8Writer);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 优雅关闭
+            try {
+                utf8Writer.flush();
+                utf8Writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        // 通知浏览器以附件的形式下载处理，设置返回头要注意文件名有中文
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8") + SUFFIX);
-
-        OutputStreamWriter utf8Writer = IoUtil.getUtf8Writer(response.getOutputStream());
-
-        // 写入文件数据
-        dealWordHandler.writeWordData(utf8Writer);
-
-        utf8Writer.flush();
-        utf8Writer.close();
     }
 
 }
