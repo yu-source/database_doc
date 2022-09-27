@@ -8,5 +8,17 @@ https://blog.csdn.net/qq_41057885/article/details/114436170
 ## 项目目标
 通过在线连接MySQL数据库 或 提供SQL文件的方式，个性化生成数据库设计文档。
 
-# 生成文档的方式
+# 使用说明
+#### 1、替换数据库，启动项目
+找到application.yml配置文件，修改如图所示的配置
+![1](src\main\resources\static\images\1.jpg)
 
+#### 2、启动项目
+项目默认端口为8888
+
+#### 3、浏览器访问接口
+
+| 接口地址        | 说明           |
+|:-----------------:|:-------------:|
+|  http://127.0.0.1:8888/download/word  |   下载word到本地，地址是./src/main/resources/static/word/，文件名默认  |
+|  http://127.0.0.1:8888/download/word2?fileName=XXX.doc  |   下载word到本地，默认地址是./src/main/resources/static/word/  |

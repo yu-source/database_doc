@@ -7,6 +7,7 @@ server:
 project:
   ## 项目名称
   name: 洛伊
+  ## 数据库名称
   database-name: scs_config
 
 
