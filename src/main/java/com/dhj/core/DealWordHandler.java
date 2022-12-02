@@ -84,7 +84,7 @@ public class DealWordHandler {
         List<Map<String, String>> tableList = tableInfoService.queryAllTableName(databaseName);
         for (Map<String, String> ele : tableList) {
             // 插入数据表标题信息
-            String tableName = TABLE_TITLE_STYLE.replace("${tableDesc}", ele.get("tableCommit"))
+            String tableName = TABLE_TITLE_STYLE.replace("${tableDesc}", ele.getOrDefault("tableCommit", ""))
                     .replace("${tableName}", ele.get("tableName"));
             writer.write(tableName);
 
@@ -95,7 +95,7 @@ public class DealWordHandler {
             writer.write(WRAP);
             writer.write(WRAP);
 
-            log.info("------【" + ele.get("tableCommit") + "】" + ele.get("tableName") + " 生成成功");
+            log.info("------【" + ele.getOrDefault("tableCommit", "") + "】" + ele.get("tableName") + " 生成成功");
         }
 
         // 设置word末尾信息

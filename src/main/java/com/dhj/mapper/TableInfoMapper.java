@@ -26,4 +26,14 @@ public interface TableInfoMapper {
      */
     List<Map<String, String>> queryTableInfoByName(@Param("databaseName") String databaseName, @Param("tableName") String tableName);
 
+    /**
+     * 获取指定数据库下所有的表 - 达梦
+     */
+    List<Map<String, String>> queryAllTableNameByDM(@Param("databaseName") String databaseName);
+
+    /**
+     * 根据表名称获取表的属性信息 - 达梦
+     */
+    List<Map<String, String>> queryTableInfoByNameByDM(@Param("databaseName") String databaseName, @Param("tableName") String tableName);
+
 }

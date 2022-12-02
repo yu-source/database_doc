@@ -29,4 +29,58 @@
             t1.TABLE_SCHEMA = #{databaseName} AND t1.TABLE_NAME = #{tableName}
     </select>
 
+    <!--获取指定数据库下所有的表 - 达梦-->
+    <select id="queryAllTableNameByDM" resultType="java.util.Map">
+        SELECT T.TABLE_NAME AS "tableName", U.COMMENTS AS "tableCommit"
+        FROM ALL_TABLES T
+                 JOIN USER_TAB_COMMENTS U ON T.TABLE_NAME = U.TABLE_NAME
+        WHERE OWNER = #{databaseName}
+        ORDER BY T.TABLE_NAME;
+    </select>
+
+    <!--根据表名称获取表的属性信息 - 达梦-->
+    <select id="queryTableInfoByNameByDM" resultType="java.util.Map">
+        select cast(tab.column_id as varchar)      as "serialNo",
+               tab.column_name                     as "fieldName",
+               tab.data_type                       AS "type",
+               cast(tab.data_length as varchar)    AS "length",
+               tab.data_type
+                   || '('
+                   || tab.data_length
+                   || ')'                          AS "typeAndLen",
+               cast(tab.data_precision as varchar) AS "precision",
+               cast(tab.data_scale as varchar)     as "numScale",
+               tab.nullable                        as "allowEmpty",
+               case
+                   when indx.constraint_type = 'P' then '主键'
+                   when indx.constraint_type = 'U' then '唯一'
+                   when indx.constraint_type = 'R' then '外键'
+                   when indx.constraint_type = 'C' then '检验'
+                   when indx.constraint_type = 'V' then '未知'
+                   else '' end                     as "mainKey",
+               tab.data_default                    as "defaultVal",
+               colcom.comments                     as "describeInfo"
+        from all_tab_columns tab
+                 left join user_tab_comments tabcom
+                           on
+                               tab.table_name = tabcom.table_name
+                 left join user_col_comments colcom
+                           on
+                                       tab.table_name = colcom.table_name
+                                   and tab.column_name = colcom.column_name
+                 left join
+             (
+                 select t1.column_name,
+                        t1.table_name,
+                        t2.constraint_type
+                 from user_ind_columns t1
+                          left join user_constraints t2
+                                    on
+                                        t1.index_name = t2.index_name
+             ) indx on tab.table_name = indx.table_name
+                 and tab.column_name = indx.column_name
+        where tab.owner = #{databaseName} and tab.table_name = #{tableName}
+        order by column_id;
+    </select>
+
 </mapper>

@@ -23,12 +23,16 @@ public class TableInfoServiceImpl implements ITableInfoService {
 
     @Override
     public List<Map<String, String>> queryAllTableName(String databaseName) {
-        return tableInfoMapper.queryAllTableName(databaseName);
+//        return tableInfoMapper.queryAllTableName(databaseName);
+        // 使用达梦数据库
+        return tableInfoMapper.queryAllTableNameByDM(databaseName);
     }
 
     @Override
     public List<Map<String, String>> queryTableInfoByName(String databaseName, String tableName) {
-        return tableInfoMapper.queryTableInfoByName(databaseName, tableName);
+//        return tableInfoMapper.queryTableInfoByName(databaseName, tableName);
+        // 使用达梦数据库
+        return tableInfoMapper.queryTableInfoByNameByDM(databaseName, tableName);
     }
 
 }
