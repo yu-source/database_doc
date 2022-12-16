@@ -50,7 +50,9 @@
                    || ')'                          AS "typeAndLen",
                cast(tab.data_precision as varchar) AS "precision",
                cast(tab.data_scale as varchar)     as "numScale",
-               tab.nullable                        as "allowEmpty",
+               case
+                   when tab.nullable = 'N' then '√'
+                   else '' end                     as "allowEmpty",
                case
                    when indx.constraint_type = 'P' then '主键'
                    when indx.constraint_type = 'U' then '唯一'
@@ -59,7 +61,8 @@
                    when indx.constraint_type = 'V' then '未知'
                    else '' end                     as "mainKey",
                tab.data_default                    as "defaultVal",
-               colcom.comments                     as "describeInfo"
+               colcom.comments                     as "describeInfo",
+               colcom.comments                     as "beizhu"
         from all_tab_columns tab
                  left join user_tab_comments tabcom
                            on

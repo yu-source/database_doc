@@ -41,13 +41,13 @@ public class WordField {
         // 序号
         list.add(getWordField("serialNo", null));
         // 字段名
-        list.add(getWordField("fieldName", null));
+        list.add(getWordField("fieldName", "字段英文名"));
         // 类型(长度)
-        list.add(getWordField("typeAndLen", null));
+        list.add(getWordField("typeAndLen", "字段类型(长度)"));
         // 主键
         list.add(getWordField("mainKey", null));
         // 描述
-        list.add(getWordField("describeInfo", null));
+        list.add(getWordField("describeInfo", "字段中文名"));
 
         return list;
     }
@@ -60,25 +60,27 @@ public class WordField {
             case "serialNo":
                 return new WordField("serialNo", StrUtil.blankToDefault(name, "序号"), 1);
             case "fieldName":
-                return new WordField("fieldName", StrUtil.blankToDefault(name, "字段名"), 2);
+                return new WordField("fieldName", StrUtil.blankToDefault(name, "字段英文名"), 2);
             case "type":
                 return new WordField("type", StrUtil.blankToDefault(name, "类型"), 1);
             case "length":
                 return new WordField("length", StrUtil.blankToDefault(name, "长度"), 1);
             case "typeAndLen":
-                return new WordField("typeAndLen", StrUtil.blankToDefault(name, "类型(长度)"), 2);
+                return new WordField("typeAndLen", StrUtil.blankToDefault(name, "字段类型(长度)"), 2);
             case "precision":
                 return new WordField("precision", StrUtil.blankToDefault(name, "精度"), 1);
             case "numScale":
                 return new WordField("numScale", StrUtil.blankToDefault(name, "小数位数"), 1);
             case "allowEmpty":
-                return new WordField("allowEmpty", StrUtil.blankToDefault(name, "允许为空"), 1);
+                return new WordField("allowEmpty", StrUtil.blankToDefault(name, "是否非空"), 1);
             case "mainKey":
                 return new WordField("mainKey", StrUtil.blankToDefault(name, "主键"), 1);
             case "defaultVal":
                 return new WordField("defaultVal", StrUtil.blankToDefault(name, "默认值"), 1);
             case "describeInfo":
-                return new WordField("describeInfo", StrUtil.blankToDefault(name, "描述"), 3);
+                return new WordField("describeInfo", StrUtil.blankToDefault(name, "字段中文名"), 3);
+            case "beizhu":
+                return new WordField("beizhu", StrUtil.blankToDefault(name, "备注"), 3);
         }
         return null;
     }

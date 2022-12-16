@@ -19,11 +19,13 @@ spring:
 #    url: jdbc:mysql://127.0.0.1:3306/information_schema?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
 #    username: root
 #    password: 123456
+#   &columnNameUpperCase=false 忽略大小写  (达梦有大小写问题，需要添加)
   datasource:
     driver-class-name: dm.jdbc.driver.DmDriver
-    url: jdbc:dm://127.0.0.1:3306/information_schema?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true&characterEncoding=UTF-8&columnNameUpperCase=false
-    username: root
-    password: 123456
+#    url: jdbc:dm://ip:port/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=true&characterEncoding=UTF-8&columnNameUpperCase=false
+#    username: root
+#    password: 123456
+
 
   web:
     resources:

@@ -30,7 +30,12 @@ public class ContentConstants {
     /**
      * 数据表名称 【${tableDesc}】${tableName}
      */
-    public static final String TABLE_TITLE_STYLE = "<w:p wsp:rsidR=\"000354C8\" wsp:rsidRDefault=\"000354C8\" wsp:rsidP=\"000354C8\"><w:pPr><w:jc w:val=\"left\"/><w:outlineLvl w:val=\"0\"/><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\" w:hint=\"fareast\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr><w:t>【${tableDesc}】${tableName}</w:t></w:r></w:p>";
+//    public static final String TABLE_TITLE_STYLE = "<w:p wsp:rsidR=\"000354C8\" wsp:rsidRDefault=\"000354C8\" wsp:rsidP=\"000354C8\"><w:pPr><w:jc w:val=\"left\"/><w:outlineLvl w:val=\"0\"/><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\" w:hint=\"fareast\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr><w:t>【${tableDesc}】${tableName}</w:t></w:r></w:p>";
+
+    public static final String TABLE_TITLE_STYLE =
+            "<w:p wsp:rsidR=\"000354C8\" wsp:rsidRDefault=\"000354C8\" wsp:rsidP=\"000354C8\"><w:pPr><w:jc w:val=\"left\"/><w:outlineLvl w:val=\"0\"/><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\" w:hint=\"fareast\"/><wx:font wx:val=\"宋体\"/><w:b/><w:b-cs/><w:sz-cs w:val=\"21\"/></w:rPr><w:t>${tableName}</w:t></w:r></w:p>"+
+            "<w:p wsp:rsidR=\"000354C8\" wsp:rsidRDefault=\"000354C8\" wsp:rsidP=\"000354C8\"><w:pPr><w:jc w:val=\"left\"/><w:outlineLvl w:val=\"0\"/><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii=\"宋体\" w:fareast=\"宋体\" w:h-ansi=\"宋体\" w:hint=\"fareast\"/><wx:font wx:val=\"宋体\"/><w:sz-cs w:val=\"21\"/></w:rPr><w:t>中文名称：${tableDesc}<w:br/>结构：</w:t></w:r></w:p>";
+
 
     /**
      * word表开始符

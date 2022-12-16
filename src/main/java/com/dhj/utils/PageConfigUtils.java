@@ -37,6 +37,17 @@ public class PageConfigUtils {
             }
         }
 
+
+        // 最后一列提前
+        list.add(0, list.remove(list.size() - 1));
+
+        // 添加备注
+        WordField field = WordField.getWordField("beizhu", config.get("describeInfo")[0]);
+        if (Objects.nonNull(field)) {
+            list.add(field);
+            lenWeight += field.getWeight();
+        }
+
         style.setWordFields(list);
         style.setLenWeight(lenWeight);
         return style;
